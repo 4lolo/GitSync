@@ -686,7 +686,7 @@ module.exports = class GitSync {
             if (new Date(wiObj.fields["System.ChangedDate"]) > new Date(issue.updated_at)) {
                 log.debug(`[WORKITEM: ${workItem.id} / ISSUE: ${issue_number}] WorkItem.ChangedDate (${new Date(wiObj.fields["System.ChangedDate"])}) is more recent than Issue.UpdatedAt (${new Date(issue.updated_at)}). Updating issue...`);
                 let title = parsed.groups.title;
-                let body = converter.makeMarkdown(wiObj.fields["System.Description"]).replace(/<br>/g, "").trim();
+                let body = converter.makeMarkdown(wiObj.fields["System.Description"] ?? "").replace(/<br>/g, "").trim();
 
                 let states = config.ado.states;
                 let state = Object.keys(states).find(k => states[k]===wiObj.fields["System.State"]);
